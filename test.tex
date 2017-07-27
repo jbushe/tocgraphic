@@ -1,0 +1,16 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+\begin{tikzpicture}[my label/.style={append after command={ node[rotate=90,anchor=center] at (\tikzlastnode.west) {#1}}}]
+\node (n1) [rectangle,draw,inner sep=10ex,label={above:label1}] {node 1};
+\node (n2) [below=of n1,rectangle,draw,inner sep=10ex,label={[rotate=90]left:label2}] {node 2};
+\node (n3) [below=of n2,rectangle,draw,inner sep=10ex,my label={label3}] {node 3};
+  \node[rotate=90,anchor=center] at (n1.west) {label}; % the equivalent of using the key "my label" on node n1
+\end{tikzpicture}
+
+
+
+\end{document}
