@@ -1,6 +1,16 @@
-\documentclass{article}
+\documentclass[preview,tikz]{standalone}
+
+
 \usepackage{tikz}
 \usetikzlibrary{calc,arrows.meta,shapes.misc,decorations.pathmorphing,backgrounds,positioning,fit}
+
+\usepackage{markusseintikz}
+
+\pgfdeclarelayer{sleeper}
+\pgfdeclarelayer{rail}
+\pgfsetlayers{background,sleeper,rail,main}
+
+
 
 %graphic for ORI-Book
 
@@ -10,14 +20,14 @@
 [
 chptr/.style={rectangle, fill=green!5, below=1em, minimum width = 4cm, text width=3.8cm, align=left}, 
 level/.style={rectangle, rounded corners=3mm, inner sep = .5cm},
-topic/.style={rectangle, minimum width = 4cm, below = 2cm, inner sep = 3pt},
+topic/.style={rectangle, minimum width = 4cm, below = 2.2cm, inner sep = 3pt},
 >/.tip={Latex[length=7mm, width=.5mm]}]
 
 
 
 
 
-	\node (sim) at (-5,10) [chptr,draw]{01 Simulation};
+	\node (sim) at (0,0) [chptr,draw]{01 Simulation};
 	\node (capass) [below=of sim,chptr,draw, align=left]{02 Capacity Assessment};
 	\node (ntwd) [below=of capass,chptr,draw]{03 Network Design};
 	\node (trou) [below=of ntwd,chptr,draw]{04 Train Routing};
@@ -65,24 +75,38 @@ topic/.style={rectangle, minimum width = 4cm, below = 2cm, inner sep = 3pt},
 	\coordinate (tactin) at ($(tact.west) + (0,0)$);
 	\coordinate (stratin) at ($(strat.west) + (0,0)$);
 	\coordinate (opin) at ($(op.west) + (0,0)$);
+	\coordinate (blockout) at ($ (block.east) + (1,0) $);
+	\coordinate (shuntout) at ($(shu.east) + (1,0)$);
+	\coordinate (cscdout) at ($(cscd.east) +(1,0)$);
 	
-	\draw[-] (sim.east) -- (stratin);
-	\draw[-] (capass.east) -- (stratin);
-	\draw[-] (ntwd.east) -- (stratin);
-	\draw[-] (trou.east) -- (stratin);
-	\draw[-] (rott.east) -- (tactin);
-	\draw[-] (evscd.east) -- (tactin);
-	\draw[-] (tall.east) -- (tactin);
-	\draw[-] (block.east) -- (tactin);
-	\draw[-] (block.east) -- (opin);
-	\draw[-] (shu.east) -- (tactin);
-	\draw[-] (shu.east) -- (opin);
-	\draw[-] (rosto.east) -- (tactin);
-	\draw[-] (rosto.east) -- (opin);
-	\draw[-] (cscd.east) -- (tactin);
-	\draw[-] (cscd.east) -- (opin);
-	\draw[-] (disp.east) -- (opin);
-	\draw[-] (delpp.east) -- (opin);
+	
+	%strategical
+	\draw[track] (stratin) to[out=180,in=0] (sim.east);
+	\draw[track] (stratin) to[out=180,in=0] (capass.east);
+	\draw[track] (stratin) to[out=180,in=0] (ntwd.east);
+	\draw[track] (stratin) to[out=180,in=0] (trou.east);
+	%tactical
+	\draw[track] (tactin) to[out=180,in=0] (rott.east);
+	\draw[track] (tactin) to[out=180,in=0] (evscd.east);
+	\draw[track] (tactin) to[out=180,in=0] (tall.east);
+	%semi-operational (both tactical and operational)
+	\draw[track] (tactin) to[out=180,in=0] (blockout);
+	\draw[track] (opin) to[out=180,in=0] (blockout);
+	\draw[track] (blockout) to (block.east);
+	
+	\draw[track] (tactin) to[out=180,in=0] (shuntout);
+	\draw[track] (opin) to[out=180,in=0] (shuntout);
+	
+	\draw[track] (shu.east) to[out=0,in=180] (shuntout);
+	
+	\draw[track] (tactin) to[out=180,in=0] (rosto.east);
+	\draw[track] (opin) to[out=180,in=0] (rosto.east);
+	\draw[track] (tactin) to[out=180,in=0] (cscdout);
+	\draw[track] (opin) to[out=180,in=0] (cscdout);
+	\draw[track] (cscdout) to (cscd.east);
+	%operational
+	\draw[track] (opin) to[out=180,in=0] (disp.east);
+	\draw[track] (opin)  to[out=180,in=0] (delpp.east);
 	
 	
 	  
