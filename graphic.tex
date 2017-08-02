@@ -75,9 +75,19 @@ topic/.style={rectangle, minimum width = 4cm, below = 2.2cm, inner sep = 3pt},
 	\coordinate (tactin) at ($(tact.west) + (0,0)$);
 	\coordinate (stratin) at ($(strat.west) + (0,0)$);
 	\coordinate (opin) at ($(op.west) + (0,0)$);
+	
+	\coordinate (blockin) at ($ (block.east) - (3pt,0) $);
 	\coordinate (blockout) at ($ (block.east) + (1,0) $);
+	
+	\coordinate (shuntin) at ($(shu.east) + (-3pt,0)$);
 	\coordinate (shuntout) at ($(shu.east) + (1,0)$);
+	
+	\coordinate (cscdin) at ($(cscd.east) + (-3pt,0)$);
 	\coordinate (cscdout) at ($(cscd.east) +(1,0)$);
+	
+	\coordinate (rostoout) at ($(rosto.east) +(1,0)$);
+	\coordinate (rostoin) at ($(rosto.east) + (-6pt,0) $);
+	
 	
 	
 	%strategical
@@ -92,18 +102,20 @@ topic/.style={rectangle, minimum width = 4cm, below = 2.2cm, inner sep = 3pt},
 	%semi-operational (both tactical and operational)
 	\draw[track] (tactin) to[out=180,in=0] (blockout);
 	\draw[track] (opin) to[out=180,in=0] (blockout);
-	\draw[track] (blockout) to (block.east);
+	\draw[track] (blockin) to (blockout);
+	
 	
 	\draw[track] (tactin) to[out=180,in=0] (shuntout);
 	\draw[track] (opin) to[out=180,in=0] (shuntout);
+	\draw[track] (shuntin) to[out=0,in=180] (shuntout);
 	
-	\draw[track] (shu.east) to[out=0,in=180] (shuntout);
+	\draw[track] (tactin) to[out=180,in=0] (rostoout);
+	\draw[track] (opin) to[out=180,in=0] (rostoout);
+	\draw[track] (rostoin) to (rostoout);
 	
-	\draw[track] (tactin) to[out=180,in=0] (rosto.east);
-	\draw[track] (opin) to[out=180,in=0] (rosto.east);
 	\draw[track] (tactin) to[out=180,in=0] (cscdout);
 	\draw[track] (opin) to[out=180,in=0] (cscdout);
-	\draw[track] (cscdout) to (cscd.east);
+	\draw[track] (cscdin) to (cscdout);
 	%operational
 	\draw[track] (opin) to[out=180,in=0] (disp.east);
 	\draw[track] (opin)  to[out=180,in=0] (delpp.east);
