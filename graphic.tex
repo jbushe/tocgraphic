@@ -1,4 +1,4 @@
-\documentclass[landscape]{article}
+\documentclass{article}
 \usepackage{tikz}
 \usetikzlibrary{calc,arrows.meta,shapes.misc,decorations.pathmorphing,backgrounds,positioning,fit}
 
@@ -56,9 +56,9 @@ topic/.style={rectangle, minimum width = 4cm, below = 2cm, inner sep = 3pt},
             \fill [blue!15] \pgfextra{\pgfsetpath\nodepathb}; 
  	 \end{scope}
 	 
-	\node[rotate = 90] (labstrat) at ($ (strat.west) + (.3cm,0) $) {strategical};
-	\node[rotate = 90] (labtact) at ($ (tact.west) + (0.3cm,0) $) {tactical};
-	\node[rotate = 90] (labop) at ($ (op.west) + (.3cm,0) $) {operational};
+	\node[rotate = 0] (labstrat) at (strat) {strategical};
+	\node[rotate = 0] (labtact) at (tact) {tactical};
+	\node[rotate = 0] (labop) at (op) {operational};
 		
 	\end{scope}
 	
@@ -66,23 +66,23 @@ topic/.style={rectangle, minimum width = 4cm, below = 2cm, inner sep = 3pt},
 	\coordinate (stratin) at ($(strat.west) + (0,0)$);
 	\coordinate (opin) at ($(op.west) + (0,0)$);
 	
-	\draw[->] (sim.east) -- (stratin);
-	\draw[->] (capass.east) -- (stratin);
-	\draw[->] (ntwd.east) -- (stratin);
-	\draw[->] (trou.east) -- (stratin);
-	\draw[->] (rott.east) -- (tactin);
-	\draw[->] (evscd.east) -- (tactin);
-	\draw[->] (tall.east) -- (tactin);
-	\draw[->] (block.east) -- (tactin);
-	\draw[->] (block.east) -- (opin);
-	\draw[->] (shu.east) -- (tactin);
-	\draw[->] (shu.east) -- (opin);
-	\draw[->] (rosto.east) -- (tactin);
-	\draw[->] (rosto.east) -- (opin);
-	\draw[->] (cscd.east) -- (tactin);
-	\draw[->] (cscd.east) -- (opin);
-	\draw[->] (disp.east) -- (opin);
-	\draw[->] (delpp.east) -- (opin);
+	\draw[-] (sim.east) -- (stratin);
+	\draw[-] (capass.east) -- (stratin);
+	\draw[-] (ntwd.east) -- (stratin);
+	\draw[-] (trou.east) -- (stratin);
+	\draw[-] (rott.east) -- (tactin);
+	\draw[-] (evscd.east) -- (tactin);
+	\draw[-] (tall.east) -- (tactin);
+	\draw[-] (block.east) -- (tactin);
+	\draw[-] (block.east) -- (opin);
+	\draw[-] (shu.east) -- (tactin);
+	\draw[-] (shu.east) -- (opin);
+	\draw[-] (rosto.east) -- (tactin);
+	\draw[-] (rosto.east) -- (opin);
+	\draw[-] (cscd.east) -- (tactin);
+	\draw[-] (cscd.east) -- (opin);
+	\draw[-] (disp.east) -- (opin);
+	\draw[-] (delpp.east) -- (opin);
 	
 	
 	  
