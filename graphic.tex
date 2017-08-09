@@ -104,22 +104,34 @@ topic/.style={rectangle, minimum width = 4cm, below = 2.2cm, inner sep = 3pt},
 	\draw[track] (tactin) to[out=180,in=0] (evscd.east);
 	\draw[track] (tactin) to[out=180,in=0] (tall.east);
 	%semi-operational (both tactical and operational)
-	\draw[track] (tactin) to[out=180,in=0] (blockout);
-	\draw[track] (opin) to[out=180,in=0] (blockout);
-	\draw[track] (blockin) to (blockout);
+	
+	\coordinate (crossing) at ($(block)!0.25!(cscd)!0.25!(tact)!0.25!(op)$) {};
+	\draw[track] (crossing) to[out=180,in=0] (block.east);
+	\draw [track] (crossing) to[out=180,in=0] (shu.east);
+	\draw [track] (crossing) to[out=180,in=0] (cscd.east);
+	\draw [track] (rosto.east) to[out=0,in=180] (crossing);
+	
+	\draw [track] (tactin) to[out=180,in=0] (crossing);
+	\draw [track] (opin) to[out=180,in=0] (crossing);
 	
 	
-	\draw[track] (tactin) to[out=180,in=0] (shuntout);
-	\draw[track] (opin) to[out=180,in=0] (shuntout);
-	\draw[track] (shuntin) to[out=0,in=180] (shuntout);
+	%\draw[track] (tactin) to[out=180,in=0] (blockout);
+	%\draw[track] (opin) to[out=180,in=0] (blockout);
+	%\draw[track] (blockin) to (blockout);
 	
-	\draw[track] (tactin) to[out=180,in=0] (rostoout);
-	\draw[track] (opin) to[out=180,in=0] (rostoout);
-	\draw[track] (rostoin) to (rostoout);
 	
-	\draw[track] (tactin) to[out=180,in=0] (cscdout);
-	\draw[track] (opin) to[out=180,in=0] (cscdout);
-	\draw[track] (cscdin) to (cscdout);
+	%\draw[track] (tactin) to[out=180,in=0] (shuntout);
+	%\draw[track] (opin) to[out=180,in=0] (shuntout);
+	%\draw[track] (shuntin) to[out=0,in=180] (shuntout);
+	
+	%\draw[track] (tactin) to[out=180,in=0] (rostoout);
+	%\draw[track] (opin) to[out=180,in=0] (rostoout);
+	%\draw[track] (rostoin) to (rostoout);
+	
+	%\draw[track] (tactin) to[out=180,in=0] (cscdout);
+	%\draw[track] (opin) to[out=180,in=0] (cscdout);
+	%\draw[track] (cscdin) to (cscdout);
+	
 	%operational
 	\draw[track] (opin) to[out=180,in=0] (disp.east);
 	\draw[track] (opin)  to[out=180,in=0] (delpp.east);
