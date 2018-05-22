@@ -1,0 +1,74 @@
+\documentclass[preview,tikz]{standalone}
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,shapes.misc,decorations.pathmorphing,backgrounds,positioning,fit}
+
+\usepackage{markusseintikz}
+
+\pgfdeclarelayer{sleeper}
+\pgfdeclarelayer{rail}
+\pgfsetlayers{background,sleeper,rail,main}
+
+\definecolor{dbgrey}{HTML}{F5F5F5}
+\definecolor{dbwhite}{HTML}{FFFFFF}
+\definecolor{dbred}{HTML}{FF0000}
+
+%graphic for ORI-Book
+
+\begin{document}
+
+\def\minute{-0.05}
+\def\xOfAbf{10.5}
+\begin{tikzpicture}
+[
+trn/.style={rectangle, fill=dbwhite, minimum width = 4cm, align=left, text width=5.3cm}, 
+header/.style={rectangle, fill=dbred, text width =5.3 cm, text=white},
+topic/.style={rectangle, minimum width = 4cm, below = 2.2cm, inner sep = 3pt},
+>/.tip={Latex[length=7mm, width=.5mm]},
+font=\sffamily]
+
+
+
+
+	\node (ankkopf) at (0,0) [header] {\textbf{Ank\"unfte}};
+	\node (ank1) at (0,{-0.5+9 * \minute}) [trn]{18:09 ICE 788  von N\"urnberg Hbf};
+	\node (ank2) at (0,{-0.5+39 * \minute}) [trn]{18:39 ICE 690 von M\"unchen Hbf};
+	\node (ank3) at (0,{-0.5+68 * \minute}) [trn]{19:08 ICE 586 von M\"unchen Hbf};
+	\node (ankfuss) at (0, {-0.5+90 * \minute} ) {};
+		
+	%\node (trou) [below=of ntwd,chptr,draw]{04 Train Routing};
+	%\node (rott) [below=of trou,chptr,draw]{05 Robust Timetabling};
+	%\node (evscd) [below=of rott,chptr,draw]{06 Event Scheduling};
+	
+	\node (abfkopf) at (\xOfAbf,0) [header] {\textbf{Abfahrten}};
+	\node (abf1) at (\xOfAbf, {-0.5+19 * \minute} ) [trn] {18:19 ICE 1519 nach Erfurt Hbf};		
+	\node (abf2) at (\xOfAbf, {-0.5+46 * \minute} ) [trn] {18:46 ICE 685 \ nach  N\"urnberg Hbf};
+	\node (abf3) at (\xOfAbf, {-0.5+81 * \minute}  ) [trn] {19:21 ICE 1719 nach M\"unchen Hbf};
+	\node (abffuss) at (\xOfAbf, {-0.5+90 * \minute}  ) {};
+	
+	%\node (test) [draw, below=of ts, shape=rounded rectangle]{test};	 
+	
+	\begin{scope}[on background layer]
+	
+	\node (ankBack) [fill=dbgrey,fit=(ankkopf) (ankfuss)]{};
+	\node (abfBack) [fill=dbgrey,fit=(abfkopf) (abffuss)]{};
+	%\node (labstrat) [rotate=-90,right=.5cm of strat,blue!30,draw]{strategical};
+	
+	\end{scope}
+
+
+	%\draw[track] (ank1.east) to[out=0, in=180] (abf1.west);
+	%\draw[track] (ank2.east) to[out=0, in=180] (abf2.west);
+	%\draw[track] (ank3.east) to[out=0, in=180] (abf3.west);
+
+	\draw[track] ({\xOfAbf/2},0) to[out=270, in=180] (abf1.west);
+	\draw[track] (ank1.east) to[out=0, in=180] (abf2.west);
+	\draw[track] (ank2.east) to[out=0, in=180] (abf3.west);
+	\draw[track] (ank3.east) to[out=0, in=90] ({\xOfAbf/2},-0.5+90*\minute);
+	
+	
+	  
+\end{tikzpicture}
+
+\end{document}
