@@ -1,0 +1,86 @@
+\documentclass[preview,tikz]{standalone}
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,shapes.misc,decorations.pathmorphing,backgrounds,positioning,fit}
+
+\usepackage{markusseintikz}
+
+\pgfdeclarelayer{sleeper}
+\pgfdeclarelayer{rail}
+\pgfsetlayers{background,sleeper,rail,main}
+
+\definecolor{dbgrey}{HTML}{F5F5F5}
+\definecolor{dbwhite}{HTML}{FFFFFF}
+\definecolor{dbred}{HTML}{FF0000}
+
+%graphic for ORI-Book
+
+\begin{document}
+
+\def\minute{-0.14}
+\def\xOfAbf{10.5}
+\begin{tikzpicture}
+[
+trn/.style={rectangle, fill=dbwhite, minimum width = 4cm, align=left, text width=5.3cm}, 
+header/.style={rectangle, fill=dbred, text width =5.3 cm, text=white},
+topic/.style={rectangle, minimum width = 4cm, below = 2.2cm, inner sep = 3pt},
+>/.tip={Latex[length=7mm, width=.5mm]},
+font=\sffamily]
+
+
+
+	%time of reference 15:20
+	\node (ankkopf) at (0,0) [header] {\textbf{Ank\"unfte}};
+	\node (ank1) at (0,{-0.5+9 * \minute}) [trn]{15:29 ICE 585  L\"ubeck Hbf};
+	\node (ank2) at (0,{-0.5+22 * \minute}) [trn]{15:42 ICE 1509 Hamburg-Altona};
+	\node (ank3) at (0,{-0.5+43 * \minute}) [trn]{16:03 ICE 1005 Berlin Gesundbr.};
+	\node (ank4) at (0,{-0.5+47 * \minute}) [trn]{16:07 ICE 625  Essen Hbf};
+	\node (ank5) at (0,{-0.5+60 * \minute}) [trn]{16:20 ICE 787  Hamburg-Altona};
+	\node (ank6) at (0,{-0.5+67 * \minute}) [trn]{16:27 ICE 517  Dortmund Hbf};
+	\node (ankfuss) at (0, {-0.5+100 * \minute} ) {};
+		
+	
+	
+	\node (abfkopf) at (\xOfAbf,0) [header] {\textbf{Abfahrten}};
+	\node (abf1) at (\xOfAbf, {-0.5+33 * \minute} ) [trn] {15:53 ICE 620  Dortmund Hbf};		
+	\node (abf2) at (\xOfAbf, {-0.5+49 * \minute} ) [trn] {16:09 ICE 1604 N\"urnberg Hbf};	
+	\node (abf3) at (\xOfAbf, {-0.5+56 * \minute} ) [trn] {16:16 ICE 1522 Dortmund Hbf};	
+	\node (abf4) at (\xOfAbf, {-0.5+68 * \minute} ) [trn] {16:28 ICE 592  Leipzig Hbf};	
+	\node (abf5) at (\xOfAbf, {-0.5+88 * \minute} ) [trn] {16:48 ICE 528  Dortmund Hbf};	
+	\node (abf6) at (\xOfAbf, {-0.5+94 * \minute} ) [trn] {16:54 ICE 1504 Hamburg-Altona};	
+
+	\node (abffuss) at (\xOfAbf, {-0.5+100 * \minute}  ) {};
+	
+	
+	\begin{scope}[on background layer]
+	
+	\node (ankBack) [fill=dbgrey,fit=(ankkopf) (ankfuss)]{};
+	\node (abfBack) [fill=dbgrey,fit=(abfkopf) (abffuss)]{};
+	
+	\end{scope}
+
+
+
+
+	\draw[track] (ank1.east) to[out=0, in=180] (abf1.west);
+	\draw[track] (ank2.east) to[out=0, in=180] (abf2.west);
+	
+	\draw[track] ({\xOfAbf/3},0) to[out=280, in=180] (abf3.west);
+	
+	\draw[track] (ank3.east) to[out=0, in=180] (abf4.west);
+	\draw[track] (ank4.east) to[out=350, in=100] ({\xOfAbf/2.2},-0.5+100*\minute);
+	
+	\draw[track] (ank5.east) to[out=0, in=180] (abf6.west);
+	\draw[track] (ank6.east) to[out=0, in=180] (abf5.west);
+
+	%\draw[track] ({\xOfAbf/2},0) to[out=270, in=180] (abf1.west);
+	%\draw[track] (ank1.east) to[out=0, in=180] (abf2.west);
+	%\draw[track] (ank2.east) to[out=0, in=180] (abf3.west);
+	%\draw[track] (ank3.east) to[out=0, in=90] ({\xOfAbf/2},-0.5+90*\minute);
+	
+	
+	  
+\end{tikzpicture}
+
+\end{document}
